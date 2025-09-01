@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "582005cb-1544-4fde-b933-5e387ddebd09",
+		"name": "EcommerceAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48067828",
+		"_collection_link": "https://omkarsanas14-1039727.postman.co/workspace/E-Commerce-API-testing-~9130176e-3e34-4e21-b0b1-51430980f101/collection/48067828-582005cb-1544-4fde-b933-5e387ddebd09?action=share&source=collection_link&creator=48067828"
+	},
+	"item": [
+		{
+			"name": "https://fakestoreapi.com/auth/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.environment.set(\"token\", data.token); // saves token\r",
+							"pm.test(\"Login successful\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"mor_2314\",\r\n  \"password\": \"83r5^_\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/auth/login",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://fakestoreapi.com/products/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Products list not empty\", () => {\r",
+							"    pm.expect(pm.response.json().length).to.be.above(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXIiOiJtb3JfMjMxNCIsImlhdCI6MTc1NjcxODE0Nn0.hePRpycTMKb9of-BXhWIhIjKK_cq5ueP5ERrPEfCMPI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fakestoreapi.com/products/",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://fakestoreapi.com/products/11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Has title field\", () => {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"title\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXIiOiJtb3JfMjMxNCIsImlhdCI6MTc1NjcxODE0Nn0.hePRpycTMKb9of-BXhWIhIjKK_cq5ueP5ERrPEfCMPI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fakestoreapi.com/products/11",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://fakestoreapi.com/carts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.environment.set(\"cartId\", data.id);  // save cartId for later use\r",
+							"pm.test(\"Cart created successfully\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{}}\nContent-Type: application/json\n",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"date\": \"2025-08-31\",\r\n  \"products\": [\r\n    { \"productId\": 1, \"quantity\": 5 }\r\n  ]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/carts",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://fakestoreapi.com/carts/7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cart updated successfully\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"date\": \"2025-08-31\",\r\n  \"products\": [\r\n    { \"productId\": 1, \"quantity\": 5 }\r\n  ]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/carts/7",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"carts",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
