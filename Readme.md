@@ -1,69 +1,63 @@
-🛒 E-commerce API Testing with Postman & Newman
-📌 Project Overview
-This project demonstrates API testing of a sample E-commerce platform using Postman.
-The test collection covers the end-to-end customer journey including:
+# 🛒 E-commerce API Testing Project (Postman & Newman)
 
-User login & token generation
+## 📌 Project Overview
+This project involves **API testing** of an **E-commerce application** using **Postman** and **Newman**.  
+Automation was implemented for key workflows including login, product retrieval, cart management, and dynamic request chaining using tokens.
 
-Viewing products
+## 🎯 Objectives
+- Automate API testing of E-commerce workflows.  
+- Validate responses, status codes, and data integrity.  
+- Implement dynamic, realistic test flows using token-based authentication.  
+- Generate automated reports using Newman.
 
-Fetching product details
+## ⚙️ Tech Stack
+- **Postman** – API request building & test automation  
+- **JavaScript (pm scripts)** – Writing test validations  
+- **Newman** – CLI-based test runner for Postman collections  
+- **Node.js** – Required for Newman execution  
 
-Adding items to the cart
+## ✅ Features Tested
+1. **User Login (POST /auth/login)**  
+   - Validate successful login  
+   - Capture and store Bearer Token for subsequent requests  
 
-Updating the cart
+2. **Get All Products (GET /products)**  
+   - Validate response status = 200  
+   - Ensure product list is not empty  
 
-Automation is achieved using Postman Tests and Newman for command-line execution and reporting.
+3. **Get Product by ID (GET /products/1)**  
+   - Validate product has a title field  
 
-⚙️ Tech Stack
-Postman – API request building & test automation
+4. **Add to Cart (POST /carts)**  
+   - Create a new cart with product(s)  
+   - Verify cart creation success  
+   - Capture `cartId` for further requests  
 
-JavaScript (pm scripts) – Writing test validations
+5. **Update Cart (PUT /carts/{id})**  
+   - Update product quantity in cart  
+   - Validate updated response  
 
-Newman – CLI-based test runner for Postman
+## 🔄 Request Chaining
+- **Token Handling:** Token from login is stored in `{{token}}` variable.  
+- **Dynamic Cart Handling:** `cartId` captured from Add to Cart response → used in Update Cart request.  
+- Enables realistic workflow simulation across multiple API calls.
 
-Node.js – Required for Newman
+## 📝 Sample Test Validations
+| Endpoint             | Validation Description |
+|---------------------|----------------------|
+| POST /auth/login     | Response contains Bearer Token; status = 200 |
+| GET /products        | Status = 200; product list not empty |
+| GET /products/1      | Product object contains `title` field |
+| POST /carts          | Cart created successfully; response contains `cartId` |
+| PUT /carts/{id}      | Updated cart quantity reflected in response |
 
-🛠️ Features Tested
-Login (POST /auth/login)
+## 🚀 Outcome
+- Automated E-commerce API workflows with dynamic data and token handling.  
+- Ensured correctness of critical endpoints (login, product retrieval, cart operations).  
+- Reduced manual effort using Postman tests + Newman CLI execution.  
+- Delivered structured execution reports for validation and stakeholder review.
 
-Validate successful login
-
-Capture and store Bearer Token
-
-Get All Products (GET /products)
-
-Validate response status = 200
-
-Ensure product list is not empty
-
-Get Product by ID (GET /products/1)
-
-Validate product has title field
-
-Add to Cart (POST /carts)
-
-Create a new cart with product(s)
-
-Verify cart creation success
-
-Update Cart (PUT /carts/{id})
-
-Update product quantity in cart
-
-Validate updated response
-
-🔄 Request Chaining
-Token from Login is stored in {{token}} variable
-
-cartId captured from Add to Cart response → used in Update Cart
-
-This makes the test flow dynamic & realistic.
-
-
-Project structure 
-📁 Ecommerce-API-Testing
- ┣ 📄 EcommerceAPI.postman_collection.json
- ┣ 📄 EcommerceEnv.postman_environment.json
- ┣ 📄 README.md
-
+---
+👨‍💻 **Tester/Automation Engineer:** Omkar Sanas  
+📅 **Duration:** Internship / Personal Project  
+🛠️ **Role:** API Testing Engineer (Postman & Newman)  
